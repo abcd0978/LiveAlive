@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.signupController">
+   <children>
+      <Button fx:id="create_account" layoutX="492.0" layoutY="647.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="316.0" text="계정만들기" />
+      <Button fx:id="is_duplicate" layoutX="340.0" layoutY="326.0" mnemonicParsing="false" text="중복확인" />
+      <Label layoutX="458.0" layoutY="55.0" text="회원가입">
+         <font>
+            <Font name="Hancom Gothic Regular" size="96.0" />
+         </font>
+      </Label>
+      <Label layoutX="337.0" layoutY="244.0" text="ID입력">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="id_fill" layoutX="338.0" layoutY="286.0" prefHeight="29.0" prefWidth="285.0" />
+      <Label layoutX="340.0" layoutY="374.0" text="패스워드 입력">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="338.0" layoutY="454.0" text="패스워드 재입력">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="pw_fill" layoutX="338.0" layoutY="410.0" prefHeight="29.0" prefWidth="285.0" />
+      <TextField fx:id="pw_refill" layoutX="338.0" layoutY="497.0" prefHeight="29.0" prefWidth="285.0" />
+      <Label layoutX="677.0" layoutY="244.0" text="이름입력">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="name_fill" layoutX="677.0" layoutY="286.0" prefHeight="29.0" prefWidth="285.0" />
+      <Button fx:id="back" layoutX="58.0" layoutY="662.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="266.0" text="앱메인으로 돌아가기" />
+   </children>
+</AnchorPane>
