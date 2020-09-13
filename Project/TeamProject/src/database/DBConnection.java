@@ -10,6 +10,7 @@ public class DBConnection {
 	private static Connection con = null;
 	private static Statement st = null;
 	private ResultSet rs;
+	private static userinfo info;
 	private static String __name;
 	
 	// DBConnection Class »ı¼ºÀÚ 
@@ -21,7 +22,8 @@ public class DBConnection {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test1?serverTimezone=UTC", "root", "0978");
 			}
-			if(st == null) {
+			if(st == null) 
+			{
 				st = con.createStatement();
 			}
 			System.out.println("database cooooooooooooooonnected");
@@ -33,7 +35,8 @@ public class DBConnection {
 	public void register(String id, String pass, String name) throws SQLException{
 		String query = "INSERT INTO login(loginid, password, name) VALUES('"+id+"','"+pass+"','"+name+"');";
 		System.out.println(query);
-		if(st.executeUpdate(query)>0) {
+		if(st.executeUpdate(query)>0) 
+		{
 			System.out.println("inserted.");
 		}
 	}

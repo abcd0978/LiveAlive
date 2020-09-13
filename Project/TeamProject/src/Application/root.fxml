@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="800.0"  prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.rootController">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.rootController">
    <children>
       <Label layoutX="438.0" layoutY="52.0" prefHeight="144.0" prefWidth="200.0" text="살자,">
          <font>
-            <Font size="86.0" />
+            <Font name="HyhwpEQ" size="86.0" />
          </font>
       </Label>
       <Label layoutX="482.0" layoutY="124.0" prefHeight="144.0" prefWidth="380.0" text="건강하게.">
