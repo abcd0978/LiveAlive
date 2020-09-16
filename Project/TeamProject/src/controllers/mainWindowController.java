@@ -13,10 +13,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import lib.CalendarInfos;
 import database.*;
 import lib.*;
@@ -29,19 +32,21 @@ public class mainWindowController
 	@FXML protected GridPane GridCal;//그리드항목들
 	@FXML private Button rightB;//버튼
 	@FXML private Button leftB;//버튼
+	@FXML private Button logout;
 	@FXML private AnchorPane anchor_day;
+	@FXML private Label user_name;
+	private DBConnection db;
 	public int __year,__month,__date;//계산을 용이하게 하기위해서 먼저 정수형태로 저장해놓는다.
-	protected List<calendarDaysController> daycon;//날짜컨트롤러 리스트
-	protected Calendar cal;//현재시각 받아오는 라이브러리
+	private List<calendarDaysController> daycon;//날짜컨트롤러 리스트
+	private Calendar cal;//현재시각 받아오는 라이브러리
 	private CalendarInfos calinfo;//달력의 계산을 대신해주는 클래스
-	public void remove()//아직 구현안됨
+	public void remove()//날짜지음
 	{
-		System.out.println("number of childrens :"+GridCal.getChildren().size());
+		System.out.println("number of Grid childrens :"+GridCal.getChildren().size());
 		GridCal.getChildren().remove(8,GridCal.getChildren().size());
-		System.out.println("number of childrens :"+GridCal.getChildren().size());
-		System.out.println("childrens : "+GridCal.getChildren());
+		System.out.println("number of Grid childrens :"+GridCal.getChildren().size());
+		//System.out.println("childrens : "+GridCal.getChildren());
 	}
-
 	public void init(int year,int month)
 	{
 		daycon = new ArrayList<>();//컨트롤러 리스트
@@ -49,8 +54,6 @@ public class mainWindowController
 		int firstday = calinfo.firstdate(year, month);
 		int lastday = calinfo.leap_date(year, month);
 		remove();
-	  //if(GridCal.getChildren().isEmpty())
-    	{
 			for(int i=1;i<7;i++)
 			{
 				for(int j=0;j<7;j++)
@@ -78,7 +81,6 @@ public class mainWindowController
 					}
 				}
 			}
-    	}
 	}
 	public void write_date(int year,int month)//연월을 입력받아 각각의 컨트롤러 리스트에 날짜를 지정하준다.
 	{
@@ -94,18 +96,20 @@ public class mainWindowController
 			}
 		}
 	}
-	public void today(int _year,int _month,int _day)//오늘을 달력에서 표시해주는 메소드
+	public void today()//오늘을 달력에서 표시해주는 메소드
 	{
 		for(calendarDaysController day : daycon)
 		{
-			if(day.day_day == _day && day.day_month == _month && day.day_year == _year)
+			if(day.day_day == __date && day.day_month == __month && day.day_year == __year)
 				day.setToday();
 		}
 	}
 	public void initialize() 
 	{
+		db = new DBConnection();
 		rightB.setOnAction(event->increase_date());
 		leftB.setOnAction(event->decrease_date());
+		logout.setOnAction(event->logout());
 		cal = Calendar.getInstance();
 		__year = cal.get(Calendar.YEAR);
 		year.setText(Integer.toString(__year));
@@ -115,8 +119,20 @@ public class mainWindowController
 		date.setText(Integer.toString(__date));
 		init(__year,__month);
 		write_date(__year,__month);
-		today(__year,__month,__date);
-		
+		today();
+		user_name.setText(db.getName());
+	}
+	public void logout()//로그아웃
+	{
+		System.out.println("로그아웃 버튼눌림");
+		try {
+			Parent login = FXMLLoader.load(getClass().getResource("../Application/root.fxml"));
+			Scene scene = new Scene(login);
+			Stage primaryStage = (Stage)logout.getScene().getWindow(); // 현재 윈도우 가져오기
+			primaryStage.setScene(scene);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}//메인메뉴로 돌아가기
 	}
 	public void init_date(int year,int month,int date)//달력 상단에 연월일을 표시한다.
 	{
@@ -137,6 +153,7 @@ public class mainWindowController
 		init(__year,__month);
 		write_date(__year,__month);
 		System.out.println("GridLines :"+GridCal.isGridLinesVisible());
+		today();
 		//System.out.println("last day:"+calinfo.leap_date(__year, __month));
 	}
 	public void decrease_date()//왼쪽버튼
@@ -152,6 +169,7 @@ public class mainWindowController
 		init(__year,__month);//달력을 새로불러온다
 		write_date(__year,__month);//달력에 일수를 써준다.
 		System.out.println("GridLines :"+GridCal.isGridLinesVisible());
+		today();
 		//System.out.println("last day:"+calinfo.leap_date(__year, __month));
 	}
 }

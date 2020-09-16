@@ -6,6 +6,7 @@ import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ public class rootController implements Initializable {
 	@FXML private Button login;
 	@FXML private Button signup;
 	@FXML private TextField user_id;
-	@FXML private TextField user_pass;
+	@FXML private PasswordField user_pass;
 	public DBConnection db;
 	@Override
 	public void initialize(java.net.URL loaction, ResourceBundle resources) 
