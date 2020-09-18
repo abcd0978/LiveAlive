@@ -1,4 +1,4 @@
-package database;
++package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,13 +10,12 @@ public class DBConnection {
 	private static Connection con = null;
 	private static Statement st = null;
 	private ResultSet rs;
-	private static userinfo info;
-	private static String __name;
+	private static String __name;//사용자 이름 저장됨
 	
 	// DBConnection Class 생성자 
-	public DBConnection() 
+	public DBConnection()
 	{
-		try 
+		try
 		{
 			if(con == null) {
 				Class.forName("com.mysql.cj.jdbc.Driver");

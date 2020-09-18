@@ -1,11 +1,6 @@
 package lib;
 
-import java.io.IOException;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
-import controllers.mainWindowController;
-public class CalendarInfos extends mainWindowController//캘린더 연산을 대신해주는 클래스
+public class CalendarInfos //캘린더 연산을 대신해주는 클래스
 {
 	public boolean is_yun(int year)//윤년인지계산해줌
 	{

@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dayPopupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="popupcontrollers.dayPopupController">
    <children>
-      <Button fx:id="daypopup_close" layoutX="536.0" layoutY="357.0" mnemonicParsing="false" text="닫기" />
+      <Button fx:id="closeButton" layoutX="536.0" layoutY="357.0" mnemonicParsing="false" text="닫기" />
       <HBox prefHeight="50.0" prefWidth="600.0">
          <children>
-            <Label fx:id="daypopup_year" prefHeight="57.0" prefWidth="165.0" text="년">
+            <Label fx:id="year" prefHeight="57.0" prefWidth="165.0" text="년">
                <font>
                   <Font size="48.0" />
                </font>
@@ -21,7 +21,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="daypopup_month" prefHeight="57.0" prefWidth="89.0" text="월">
+            <Label fx:id="month" prefHeight="57.0" prefWidth="89.0" text="월">
                <font>
                   <Font size="48.0" />
                </font>
@@ -31,7 +31,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="daypopup_date" prefHeight="57.0" prefWidth="111.0" text="일">
+            <Label fx:id="date" prefHeight="57.0" prefWidth="111.0" text="일">
                <font>
                   <Font size="48.0" />
                </font>
@@ -39,6 +39,11 @@
             <Label prefHeight="73.0" prefWidth="47.0" text="일">
                <font>
                   <Font size="24.0" />
+               </font>
+            </Label>
+            <Label prefHeight="88.0" prefWidth="107.0" text="일정">
+               <font>
+                  <Font size="36.0" />
                </font>
             </Label>
          </children>

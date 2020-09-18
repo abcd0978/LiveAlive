@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -22,21 +23,20 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lib.CalendarInfos;
 import database.*;
-import lib.*;
 
 public class mainWindowController
 {
-	@FXML protected Label year;
-	@FXML protected Label month;
-	@FXML protected Label date;
-	@FXML protected GridPane GridCal;//그리드항목들
+	@FXML private Label year;
+	@FXML private Label month;
+	@FXML private Label date;
+	@FXML private GridPane GridCal;//그리드항목들
 	@FXML private Button rightB;//버튼
 	@FXML private Button leftB;//버튼
 	@FXML private Button logout;
 	@FXML private AnchorPane anchor_day;
 	@FXML private Label user_name;
 	private DBConnection db;
-	public int __year,__month,__date;//계산을 용이하게 하기위해서 먼저 정수형태로 저장해놓는다.
+	private int __year,__month,__date;//계산을 용이하게 하기위해서 먼저 정수형태로 저장해놓는다.
 	private List<calendarDaysController> daycon;//날짜컨트롤러 리스트
 	private Calendar cal;//현재시각 받아오는 라이브러리
 	private CalendarInfos calinfo;//달력의 계산을 대신해주는 클래스
@@ -45,13 +45,12 @@ public class mainWindowController
 		System.out.println("number of Grid childrens :"+GridCal.getChildren().size());
 		GridCal.getChildren().remove(8,GridCal.getChildren().size());
 		System.out.println("number of Grid childrens :"+GridCal.getChildren().size());
-		//System.out.println("childrens : "+GridCal.getChildren());
 	}
 	public void init(int year,int month)
 	{
 		daycon = new ArrayList<>();//컨트롤러 리스트
 		calinfo = new CalendarInfos(); //달력계산객체
-		int firstday = calinfo.firstdate(year, month);
+		int firstday = calinfo.firstdate(year, month)%7;
 		int lastday = calinfo.leap_date(year, month);
 		remove();
 			for(int i=1;i<7;i++)
@@ -62,7 +61,7 @@ public class mainWindowController
 					loader.setLocation(getClass().getResource("/Application/calendarDays.fxml"));//달력의일을 불러옴
 					 try 
 					 {
-					    if(i==1 && j<calinfo.firstdate(year, month))//해당 달의 1일부터 달력을 그림
+					    if(i==1 && j<firstday)//해당 달의 1일부터 달력을 그림
 					    	continue;
 					    else if((((i-1)*7) - (firstday)+j) == lastday)//해당달의 끝까지 그리게되면 달력을 그만그림.
 					    	return;
@@ -73,12 +72,12 @@ public class mainWindowController
 								calendarDaysController dc = loader.getController();
 								daycon.add(dc);
 					    	}
-					    } 
+					   }
 					 catch (IOException e) 
 					 {
 							e.printStackTrace();
 							System.out.printf("%d행%d열 그리는데 문제 발생 \n",i,j);
-					}
+					 }
 				}
 			}
 	}
@@ -100,7 +99,7 @@ public class mainWindowController
 	{
 		for(calendarDaysController day : daycon)
 		{
-			if(day.day_day == __date && day.day_month == __month && day.day_year == __year)
+			if(day.day_day == cal.get(Calendar.DATE) && day.day_month == cal.get(Calendar.MONTH)+1 && day.day_year == cal.get(Calendar.YEAR))
 				day.setToday();
 		}
 	}
@@ -130,6 +129,7 @@ public class mainWindowController
 			Scene scene = new Scene(login);
 			Stage primaryStage = (Stage)logout.getScene().getWindow(); // 현재 윈도우 가져오기
 			primaryStage.setScene(scene);
+			
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}//메인메뉴로 돌아가기

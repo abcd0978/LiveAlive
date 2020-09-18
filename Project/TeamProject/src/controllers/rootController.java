@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,8 +26,7 @@ public class rootController implements Initializable {
 		db = new DBConnection();
 		login.setOnAction(event->do_action(event));
 		signup.setOnAction(event->{
-			try 
-			{
+			try {
 				do_signup(event);
 			} catch (Exception e) 
 			{
@@ -46,7 +44,7 @@ public class rootController implements Initializable {
 			{
 				System.out.println("logined.");
 				System.out.println("debug");
-			    Parent login_ = FXMLLoader.load(getClass().getResource("/Application/mainWindow.fxml"));// 불러오기
+			    Parent login_ = FXMLLoader.load(getClass().getResource("../Application/mainWindow.fxml"));// 불러오기
 			    Scene scene = new Scene(login_);
 			    Stage primaryStage = (Stage)login.getScene().getWindow(); // 현재 윈도우 가져오기
 			    primaryStage.setScene(scene);
@@ -55,7 +53,8 @@ public class rootController implements Initializable {
 			{
 				System.out.println("login failed.");
 			}
-		}catch(Exception e1) {
+		}catch(Exception e1)
+		{
 			e1.printStackTrace();
 		}
 	}
