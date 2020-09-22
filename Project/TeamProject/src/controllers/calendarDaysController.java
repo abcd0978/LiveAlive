@@ -25,7 +25,7 @@ public class calendarDaysController implements Initializable//캘린더의 각각의 날
 	@FXML private Button add_todo;//일정버튼
 	@FXML private Button daypopup_close;
 	private popup pop;
-	public Stage popup;//팝업스테이지 변수
+
 	public int day_year,day_month,day_day;//몇년 몇월 몇일
 	public void initialize(URL location, ResourceBundle resources)
 	{ 

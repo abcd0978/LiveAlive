@@ -38,12 +38,14 @@ public class signupController implements Initializable {
 	public void goBack(ActionEvent e)
 	{
 		System.out.println("debug message");
-		try {
+		try 
+		{
 			Parent login = FXMLLoader.load(getClass().getResource("../Application/root.fxml"));
 			Scene scene = new Scene(login);
 			Stage primaryStage = (Stage)back.getScene().getWindow(); // 현재 윈도우 가져오기
 			primaryStage.setScene(scene);
-		} catch (IOException e1) {
+		} catch (IOException e1) 
+		{
 			e1.printStackTrace();
 		}//메인메뉴로 돌아가기
 	}

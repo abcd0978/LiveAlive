@@ -1,4 +1,4 @@
-+package database;
+package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,17 +7,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBConnection {
-	private static Connection con = null;
-	private static Statement st = null;
-	private ResultSet rs;
+	protected static Connection con = null;
+	protected static Statement st = null;
+	protected ResultSet rs;
 	private static String __name;//사용자 이름 저장됨
-	
+	private static int pk;
 	// DBConnection Class 생성자 
 	public DBConnection()
 	{
 		try
 		{
-			if(con == null) {
+			if(con == null) 
+			{
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test1?serverTimezone=UTC", "root", "0978");
 			}
@@ -26,12 +27,13 @@ public class DBConnection {
 				st = con.createStatement();
 			}
 			System.out.println("database cooooooooooooooonnected");
-		} catch(Exception e) {
+		} catch(Exception e) 
+		{
 			System.out.println("Database Connection Error : " + e.getMessage());
 		}
 	}
-	
-	public void register(String id, String pass, String name) throws SQLException{
+	public void register(String id, String pass, String name) throws SQLException
+	{
 		String query = "INSERT INTO login(loginid, password, name) VALUES('"+id+"','"+pass+"','"+name+"');";
 		System.out.println(query);
 		if(st.executeUpdate(query)>0) 
@@ -52,6 +54,7 @@ public class DBConnection {
 			String __pw = rs.getString("password");
 			if(__id.equals(id) && __pw.equals(pass)) {
 				__name = rs.getString("name");
+				pk = rs.getInt("id");
 				return true;
 			}
 		}
@@ -60,5 +63,9 @@ public class DBConnection {
 	
 	public String getName() {
 		return __name;
+	}
+	public int getid()
+	{
+		return pk;
 	}
 }

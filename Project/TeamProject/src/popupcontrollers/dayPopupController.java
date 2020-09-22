@@ -22,7 +22,8 @@ public class dayPopupController extends closable implements Initializable //ÆË¾÷
 	/**
 	 * @return the year
 	 */
-	public String getYear() {
+	public String getYear() 
+	{
 		return year.getText();
 	}
 	/**
@@ -40,8 +41,9 @@ public class dayPopupController extends closable implements Initializable //ÆË¾÷
 	/**
 	 * @param month the month to set
 	 */
-	public void setMonth(String month) {
-		this.month.setText(month);;
+	public void setMonth(String month) 
+	{
+		this.month.setText(month);
 	}
 	/**
 	 * @return the date

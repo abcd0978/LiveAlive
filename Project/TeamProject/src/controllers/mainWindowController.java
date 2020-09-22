@@ -2,11 +2,11 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +23,11 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lib.CalendarInfos;
 import database.*;
+import popupcontrollers.dayPopupController;
+import popupcontrollers.popup;
+import popupcontrollers.DailyIntakePopupController;
+import popupcontrollers.userInfoPopupController;
+import popupcontrollers.DailyWorkoutPopupController;
 
 public class mainWindowController
 {
@@ -33,13 +38,24 @@ public class mainWindowController
 	@FXML private Button rightB;//버튼
 	@FXML private Button leftB;//버튼
 	@FXML private Button logout;
-	@FXML private AnchorPane anchor_day;
-	@FXML private Label user_name;
+	@FXML private Label tall;//키
+	@FXML private Label age;//체중
+	@FXML private Label weight;//몸무게
+	@FXML private Label sex;//성별
+	@FXML private Label bmr;//기초대사량
+	@FXML private Label user_name;//이름
+	@FXML private Button daily_intake;//섭취팝업버튼
+	@FXML private Button user_info;//회원정보 버튼
+	@FXML private Button daily_workout;//운동팝업버튼
+	private popup workoutPopup;//운동팝업
+	private popup intakePopup;//섭취팝업
+	private popup userinfoPopup;//회원정보팝업
 	private DBConnection db;
-	private int __year,__month,__date;//계산을 용이하게 하기위해서 먼저 정수형태로 저장해놓는다.
+	private int __year,__month,__date;//계산을위한 수
 	private List<calendarDaysController> daycon;//날짜컨트롤러 리스트
 	private Calendar cal;//현재시각 받아오는 라이브러리
 	private CalendarInfos calinfo;//달력의 계산을 대신해주는 클래스
+	private userinfo userin;
 	public void remove()//날짜지음
 	{
 		System.out.println("number of Grid childrens :"+GridCal.getChildren().size());
@@ -103,12 +119,15 @@ public class mainWindowController
 				day.setToday();
 		}
 	}
-	public void initialize() 
+	public void initialize() throws SQLException 
 	{
-		db = new DBConnection();
+		userin = new userinfo();
 		rightB.setOnAction(event->increase_date());
 		leftB.setOnAction(event->decrease_date());
 		logout.setOnAction(event->logout());
+		user_info.setOnAction(event->user_info());
+		daily_intake.setOnAction(event->daily_intake());
+		daily_workout.setOnAction(event->daily_workout());
 		cal = Calendar.getInstance();
 		__year = cal.get(Calendar.YEAR);
 		year.setText(Integer.toString(__year));
@@ -119,7 +138,35 @@ public class mainWindowController
 		init(__year,__month);
 		write_date(__year,__month);
 		today();
-		user_name.setText(db.getName());
+		tall.setText(userin.getTall());
+		age.setText(userin.getAge());
+		sex.setText(userin.getSex());
+		user_name.setText(userin.getName());
+	}
+	public void daily_workout()
+	{
+		System.out.println("운동버튼 눌림");
+		workoutPopup = new popup("운동");
+		workoutPopup.setLocation("/Application/dailyWorkoutPopup.fxml");
+		((DailyWorkoutPopupController)workoutPopup.getController()).setText(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DATE));
+		
+		workoutPopup.show();
+	}
+	public void daily_intake()
+	{
+		System.out.println("섭취버튼 눌림");
+		intakePopup = new popup("섭취");
+		intakePopup.setLocation("/Application/dailyIntakePopup.fxml");
+		((DailyIntakePopupController)intakePopup.getController()).setText(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DATE));
+		
+		intakePopup.show();
+	}
+	public void user_info()
+	{
+		System.out.println("회원정보 버튼 눌림");
+		userinfoPopup = new popup("회원정보");
+		userinfoPopup.setLocation("/Application/enterUserInfoPopup.fxml");
+		userinfoPopup.show();
 	}
 	public void logout()//로그아웃
 	{
@@ -149,9 +196,9 @@ public class mainWindowController
 		{
 			__month++;
 		}
-		init_date(__year,__month,1);
-		init(__year,__month);
-		write_date(__year,__month);
+		init_date(__year,__month,1);//달력위에 표시되어지는 날짜를 씀
+		init(__year,__month);//달력을 그림
+		write_date(__year,__month);//달력에 날짜를 새김
 		System.out.println("GridLines :"+GridCal.isGridLinesVisible());
 		today();
 		//System.out.println("last day:"+calinfo.leap_date(__year, __month));
@@ -165,9 +212,9 @@ public class mainWindowController
 		else{
 			__month--;
 		}
-		init_date(__year,__month,1);
-		init(__year,__month);//달력을 새로불러온다
-		write_date(__year,__month);//달력에 일수를 써준다.
+		init_date(__year,__month,1);//달력위에 표시되어지는 날짜를 씀
+		init(__year,__month);//달력을 그림
+		write_date(__year,__month);//달력에 날짜를 새김.
 		System.out.println("GridLines :"+GridCal.isGridLinesVisible());
 		today();
 		//System.out.println("last day:"+calinfo.leap_date(__year, __month));
