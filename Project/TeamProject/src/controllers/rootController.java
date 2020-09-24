@@ -19,13 +19,13 @@ public class rootController implements Initializable {
 	@FXML private Button signup;
 	@FXML private TextField user_id;
 	@FXML private PasswordField user_pass;
-	public DBConnection db;
+	public member mb;
 	@Override
 	public void initialize(java.net.URL loaction, ResourceBundle resources) 
 	{
-		db = new DBConnection();
-		login.setOnAction(event->do_action(event));
-		signup.setOnAction(event->{
+		mb = new member();//db객체를 생성한다.
+		login.setOnAction(event->do_action(event));//로그인버튼 이벤트 등록
+		signup.setOnAction(event->{//회원가입버튼 이벤트 등록
 			try {
 				do_signup(event);
 			} catch (Exception e) 
@@ -34,13 +34,13 @@ public class rootController implements Initializable {
 			}
 		});
 	}
-	public void do_action(ActionEvent e)
+	public void do_action(ActionEvent e)//로그인하는 메소드
 	{
-		System.out.println("login pressed");
-		System.out.println("id: " + user_id.getText());
-		System.out.println("pw: " + user_pass.getText());
+		System.out.println("login pressed");//디버그메세지
+		System.out.println("id: " + user_id.getText());//디버그메세지
+		System.out.println("pw: " + user_pass.getText());//디버그메세지
 		try {
-			if(db.login(user_id.getText(), user_pass.getText()))
+			if(mb.login(user_id.getText(), user_pass.getText()))
 			{
 				System.out.println("logined.");
 				System.out.println("debug");

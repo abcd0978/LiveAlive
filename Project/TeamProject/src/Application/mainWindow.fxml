@@ -100,13 +100,18 @@
                </font></Label>
             <Button fx:id="logout" layoutX="1166.0" layoutY="757.0" mnemonicParsing="false" text="로그아웃" />
             <Button fx:id="user_info" layoutX="888.0" layoutY="20.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="130.0" text="회원정보입력" />
-            <HBox layoutX="466.0" layoutY="96.0" prefHeight="64.0" prefWidth="413.0" spacing="50.0">
+            <HBox layoutX="392.0" layoutY="96.0" prefHeight="64.0" prefWidth="487.0">
                <children>
-                  <Label fx:id="tall" text="키" />
-                  <Label fx:id="weight" text="체중" />
-                  <Label fx:id="age" text="나이" />
-                  <Label fx:id="sex" text="성별" />
-                  <Label fx:id="bmr" text="기초대사량" />
+                  <Label fx:id="tall" prefHeight="19.0" prefWidth="43.0" text="키" />
+                  <Label prefHeight="19.0" prefWidth="40.0" text="cm" />
+                  <Label fx:id="weight" prefHeight="19.0" prefWidth="49.0" text="체중" />
+                  <Label prefHeight="19.0" prefWidth="30.0" text="kg" />
+                  <Label fx:id="age" prefHeight="19.0" prefWidth="31.0" text="나이" />
+                  <Label prefHeight="19.0" prefWidth="18.0" text="세" />
+                  <Label fx:id="sex" prefHeight="19.0" prefWidth="46.0" text="성별" />
+                  <Label text="기초대사량" />
+                  <Label fx:id="bmr" prefHeight="19.0" prefWidth="87.0" text="Label" />
+                  <Label prefHeight="19.0" prefWidth="34.0" text="kcal" />
                </children>
             </HBox>
             <Button fx:id="daily_intake" layoutX="888.0" layoutY="84.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="130.0" text="하루섭취" />

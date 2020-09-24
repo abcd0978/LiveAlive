@@ -17,12 +17,12 @@
       <Label layoutX="52.0" layoutY="290.0" text="성별" />
       <HBox layoutX="52.0" layoutY="329.0" prefHeight="19.0" prefWidth="119.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="남성">
+            <RadioButton fx:id="male" mnemonicParsing="false" text="남성">
                <toggleGroup>
                   <ToggleGroup fx:id="sex" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="여성" toggleGroup="$sex" />
+            <RadioButton fx:id="female" mnemonicParsing="false" text="여성" toggleGroup="$sex" />
          </children>
       </HBox>
       <Label layoutX="52.0" layoutY="72.0" text="키" />
@@ -31,6 +31,6 @@
       <TextField fx:id="age" layoutX="52.0" layoutY="171.0" />
       <Label layoutX="52.0" layoutY="213.0" text="현재 체중" />
       <TextField fx:id="weight" layoutX="52.0" layoutY="248.0" />
-      <Button layoutX="416.0" layoutY="357.0" mnemonicParsing="false" text="저장하기" />
+      <Button fx:id="saveButton" layoutX="416.0" layoutY="357.0" mnemonicParsing="false" text="저장하기" />
    </children>
 </AnchorPane>

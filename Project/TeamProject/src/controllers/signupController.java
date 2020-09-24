@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import popupcontrollers.popup;
 import database.*;
 
 
@@ -24,17 +25,19 @@ public class signupController implements Initializable {
 	@FXML private TextField pw_fill;
 	@FXML private TextField pw_refill;
 	@FXML private TextField name_fill;
-	private boolean is_dup = false;//아이디 중복
 	private DBConnection db;
+	private member mb;
 	private PreparedStatement pstmt = null;
+	private popup inputError;
 	@Override
 	public void initialize(java.net.URL loaction, ResourceBundle resources) 
 	{
-		db = new DBConnection();
+		mb = new member();
 		back.setOnAction(event->goBack(event));
 		is_duplicate.setOnAction(event->isDuplicate(event));
 		create_account.setOnAction(event->createAccount(event));
 	}
+	
 	public void goBack(ActionEvent e)
 	{
 		System.out.println("debug message");
@@ -49,9 +52,34 @@ public class signupController implements Initializable {
 			e1.printStackTrace();
 		}//메인메뉴로 돌아가기
 	}
-	public boolean isDuplicate(ActionEvent e)
+	//아이디 중복 확인
+	public void isDuplicate(ActionEvent e)
 	{
-		return is_dup;
+		try {
+			if(mb.isId_dup(id_fill.getText())) {
+				System.out.println("isDuplicate");
+				inputError = new popup("중복된 아이디");
+				inputError.setLocation("/Application/signupIddupPopup.fxml");
+				inputError.show();
+				return;
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+	}
+	//공백 입력했을 때
+	public void InputEmpty() {
+		inputError = new popup("입력 오류");
+		inputError.setLocation("/Application/signupEmptyPopup.fxml");
+		inputError.show();
+	}
+	
+	//입력한 두 비밀번호가 일치하지 않을 때
+	public void WrongPass() {
+		inputError = new popup("입력 오류");
+		inputError.setLocation("/Application/signupPasswrongPopup.fxml");
+		inputError.show();
 	}
 	public void createAccount(ActionEvent e)
 	{
@@ -60,13 +88,22 @@ public class signupController implements Initializable {
 		if(!pw_fill.getText().equals(pw_refill.getText())) {
 			System.out.println("pw_fill: "+pw_fill.getText() +" pw_refill: "+pw_refill.getText());
 			System.out.println("pass differs");
+			WrongPass();
 			return;
 		}
+		
+		if(id_fill.getText().isEmpty() || pw_fill.getText().isEmpty() || name_fill.getText().isEmpty() || pw_refill.getText().isEmpty()) {
+			System.out.println("id_fill or pw_fill or pw_refill or name_fill isEmpty");
+			InputEmpty();
+			return;
+		}
+		
 		System.out.println("id: " + id_fill.getText());
 		System.out.println("pw: " + pw_fill.getText());
 		System.out.println("name: " + name_fill.getText());
+		
 		try {
-			db.register(id_fill.getText(), pw_fill.getText(), name_fill.getText());
+			mb.register(id_fill.getText(), pw_fill.getText(), name_fill.getText());
 		}catch(Exception e1) {
 			e1.printStackTrace();
 		}

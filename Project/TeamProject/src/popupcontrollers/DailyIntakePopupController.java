@@ -13,11 +13,9 @@ public class DailyIntakePopupController extends closable implements Initializabl
 	@FXML private Label year;
     @FXML private Label month;
     @FXML private Label date;
-    private userinfo user_i;
     public void initialize(URL location, ResourceBundle resources) 
 	{
 		super.initialize(location, resources);
-		user_i = new userinfo();
 	}
     public void setText(int year,int month,int day)
     {

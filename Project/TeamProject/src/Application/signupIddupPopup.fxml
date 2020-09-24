@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="popupcontrollers.signupErrorPopupController">
+   <children>
+      <AnchorPane layoutX="-8.0" layoutY="-2.0" prefHeight="168.0" prefWidth="288.0">
+         <children>
+            <Label layoutX="57.0" layoutY="53.0" prefHeight="31.0" prefWidth="191.0" text="이미 가입된 아이디 입니다." />
+            <Button fx:id="closeButton" layoutX="223.0" layoutY="118.0" mnemonicParsing="false" text="닫기" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
