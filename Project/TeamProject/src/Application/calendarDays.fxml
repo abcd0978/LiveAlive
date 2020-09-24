@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="anchor_day" prefHeight="93.0" prefWidth="99.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.calendarDaysController">
+   <children>
+      <Label fx:id="lblDay" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="34.0" prefWidth="37.0" style="-fx-border-color: #000000;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="add_todo" layoutX="10.0" layoutY="47.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="51.0" text="일정">
+         <font>
+            <Font size="11.0" />
+         </font></Button>
+      <Label fx:id="today" layoutX="53.0" layoutY="18.0" prefHeight="13.0" prefWidth="37.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
