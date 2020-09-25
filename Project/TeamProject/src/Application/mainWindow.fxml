@@ -99,7 +99,7 @@
                   <Font size="24.0" />
                </font></Label>
             <Button fx:id="logout" layoutX="1166.0" layoutY="757.0" mnemonicParsing="false" text="로그아웃" />
-            <Button fx:id="user_info" layoutX="888.0" layoutY="20.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="130.0" text="회원정보입력" />
+            <Button fx:id="user_info" layoutX="888.0" layoutY="20.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="130.0" text="회원정보변경" />
             <HBox layoutX="392.0" layoutY="96.0" prefHeight="64.0" prefWidth="487.0">
                <children>
                   <Label fx:id="tall" prefHeight="19.0" prefWidth="43.0" text="키" />

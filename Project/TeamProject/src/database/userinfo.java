@@ -154,7 +154,6 @@ public class userinfo extends member
 		String query = "UPDATE user_info2"
 				+" SET weight = '"+weight
 				+"' WHERE DATE = '"+year+"-"+monthS+"-"+this.date+"' AND id ='"+user_id+"';";
-		System.out.println(query);
 		DBConnection.st.execute(query);
 	}
 }

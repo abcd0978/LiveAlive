@@ -29,8 +29,12 @@
       <TextField fx:id="tall" layoutX="52.0" layoutY="102.0" />
       <Label layoutX="52.0" layoutY="140.0" text="태어난 년도" />
       <TextField fx:id="age" layoutX="52.0" layoutY="171.0" />
-      <Label layoutX="52.0" layoutY="213.0" text="현재 체중" />
+      <Label layoutX="50.0" layoutY="223.0" text="현재 체중" />
       <TextField fx:id="weight" layoutX="52.0" layoutY="248.0" />
       <Button fx:id="saveButton" layoutX="416.0" layoutY="357.0" mnemonicParsing="false" text="저장하기" />
+      <Label layoutX="92.0" layoutY="72.0" text="(소수점 첫째자리)" />
+      <Label layoutX="152.0" layoutY="140.0" text="(19YY형식 4자리)" />
+      <Label layoutX="138.0" layoutY="223.0" text="(소수점 첫째자리)" />
+      <Label fx:id="warning" layoutX="328.0" layoutY="200.0" prefHeight="19.0" prefWidth="180.0" text="warning" textFill="RED" />
    </children>
 </AnchorPane>
