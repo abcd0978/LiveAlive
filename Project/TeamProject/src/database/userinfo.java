@@ -38,7 +38,7 @@ public class userinfo extends member
 		}
 		if(result == 0.0)
 		{
-			return "no";
+			return "0";
 		}
 		return Float.toString(result);
 	}
@@ -63,7 +63,7 @@ public class userinfo extends member
 		}
 		if(result == 0)
 		{
-			return "no";
+			return "0";
 		}
 		return Integer.toString(cal.get(Calendar.YEAR)-result);//현재년에서 태어난연도를 뺀다
 	}
@@ -96,7 +96,7 @@ public class userinfo extends member
 	}
 	public String getResentWeight() throws SQLException//최근에 입력한 체중을 리턴한다 
 	{
-		String weight="";
+		String weight="0";
 		String query = "SELECT * FROM user_info2 "
 				+"WHERE id = '"+user_id
 				+"' ORDER BY DATE DESC;";
@@ -104,9 +104,9 @@ public class userinfo extends member
 		{
 			DBConnection.rs = DBConnection.st.getResultSet();
 		}
-		while(DBConnection.rs.next())
+		while(DBConnection.rs.next())//최근데이터 
 		{
-			if(!DBConnection.rs.getString("weight").equals("0.0"))
+			if(!DBConnection.rs.getString("weight").equals("0.0"))//weight가 0이아니면서 최근인것
 			{
 				weight = DBConnection.rs.getString("weight");
 				break;
@@ -116,19 +116,17 @@ public class userinfo extends member
 	}
 	public void initUserInfo2() throws SQLException//시작할때 오늘날짜의 user_info행이 생성되었는지 안되었는지 확인하고 안되었으면 생성함.
 	{
-		int count=0;//데이터가 하나라도 존재하는지 확인하는 변수
 		String date="";
 		String query = "SELECT * FROM user_info2 "//현재 접속한 유저의 user_info를 날짜순으로 나열하는 쿼리문
 				+"WHERE id = '"+user_id
 				+"' ORDER BY DATE DESC;";
-		if(DBConnection.st.execute(query))
+		if(DBConnection.st.execute(query))//쿼리실행
 		{
 			DBConnection.rs = DBConnection.st.getResultSet();
 		}
-		while(DBConnection.rs.next())
-			count++;
-		if(count>0)
+		if(DBConnection.rs.next())//다음데이터가 존재하는가
 		{
+			System.out.println(DBConnection.rs);
 			date = DBConnection.rs.getString("date");//가장최근의 데이터를 받아온다
 			if(!date.equals(year+"-"+monthS+"-"+(this.date)))//만약 가장 최근에 생성한 user_info데이터가 현재가 아니라면,날짜만있고 전부 NULL로 데이터를 생성한다
 				{
@@ -138,12 +136,11 @@ public class userinfo extends member
 				DBConnection.st.execute(query2);
 				System.out.println("hello ");
 			}
-			else
-			{
+			else{
 				System.out.println("alreay exist");//이미 존재할시에.
 			}
 		}
-		else
+		else//다음데이터가 존재하지않으면 신규유저
 		{
 			String query2 = "INSERT INTO user_info2 (DATE,id) "
 					+ "VALUE ('"+year+"-"+monthS+"-"+this.date+"','"+user_id+"');";

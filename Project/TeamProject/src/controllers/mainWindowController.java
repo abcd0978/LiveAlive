@@ -153,10 +153,9 @@ public class mainWindowController
 		tall.setText(userin.getTall());//메인화면에 키가 나오게한다
 		age.setText(userin.getAge());//메인화면에 나이가 나오게한다
 		sex.setText(userin.getSex());//메인화면에 성별이 나오게한다
-		//bmr.setText(calc_bmr());
+		bmr.setText(calc_bmr());
 		weight.setText(userin.getResentWeight());//메인화면에 최근에입력한 체중이 나오게한다.
 		user_name.setText(userin.getName());//메인화면에 사용자의 이름이 나오게한다.
-
 	}
 	public void daily_workout()
 	{
