@@ -6,11 +6,10 @@ public class member{
 
 	private static String __name;//사용자 이름 저장됨
 	private static int pk;
-	private static DBConnection db;
-	public member()
-	{
-		db = DBConnection.getInstance();
-	}
+
+	/*
+	 * public member() { db = DBConnection.getInstance(); }
+	 */
 	public void register(String id, String pass, String name) throws SQLException
 	{
 		String query = "INSERT INTO member(loginid, password, name) VALUES('"+id+"','"+pass+"','"+name+"');";

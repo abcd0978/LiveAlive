@@ -4,16 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+//싱글톤 패턴
 public class DBConnection {
 	protected static Connection con = null;
 	protected static Statement st = null;
 	protected static ResultSet rs;
-	static private DBConnection db;
-	
-	// DBConnection Class 생성자 
-	private DBConnection(){}//생성자 접근못하게 막아놓음
-	public static DBConnection getInstance()//싱들톤패턴
+	private static DBConnection db;
+
+	private DBConnection()//생성자는 접근못하게 막아놓음
+	{}
+	public static DBConnection getInstance()
 	{
 		if(db==null)//전역객체가 null이면 생성해서 반환
 		{

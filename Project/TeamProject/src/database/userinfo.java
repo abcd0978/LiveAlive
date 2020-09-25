@@ -116,6 +116,7 @@ public class userinfo extends member
 	}
 	public void initUserInfo2() throws SQLException//시작할때 오늘날짜의 user_info행이 생성되었는지 안되었는지 확인하고 안되었으면 생성함.
 	{
+		int count=0;//데이터가 하나라도 존재하는지 확인하는 변수
 		String date="";
 		String query = "SELECT * FROM user_info2 "//현재 접속한 유저의 user_info를 날짜순으로 나열하는 쿼리문
 				+"WHERE id = '"+user_id
@@ -124,22 +125,32 @@ public class userinfo extends member
 		{
 			DBConnection.rs = DBConnection.st.getResultSet();
 		}
-		DBConnection.rs.next();
-		date = DBConnection.rs.getString("date");
-		if(!date.equals(year+"-"+monthS+"-"+(this.date)))//만약 가장 최근에 생성한 user_info데이터가 현재가 아니라면,날짜만있고 전부 NULL로 데이터를 생성한다
+		while(DBConnection.rs.next())
+			count++;
+		if(count>0)
 		{
-			String query2 = "INSERT INTO user_info2 (DATE,id) "
-					+ "VALUE ('"+year+"-"+monthS+"-"+this.date+"','"+user_id+"');";
-			System.out.println(query2);
-			if(DBConnection.st.execute(query2))
+			date = DBConnection.rs.getString("date");//가장최근의 데이터를 받아온다
+			if(!date.equals(year+"-"+monthS+"-"+(this.date)))//만약 가장 최근에 생성한 user_info데이터가 현재가 아니라면,날짜만있고 전부 NULL로 데이터를 생성한다
+				{
+				String query2 = "INSERT INTO user_info2 (DATE,id) "
+						+ "VALUE ('"+year+"-"+monthS+"-"+this.date+"','"+user_id+"');";
+				System.out.println(query2);
+				DBConnection.st.execute(query2);
+				System.out.println("hello ");
+			}
+			else
 			{
-				System.out.println("new day data inserted");
+				System.out.println("alreay exist");//이미 존재할시에.
 			}
 		}
 		else
 		{
-			System.out.println("alreay exist");//이미 존재할시에.
+			String query2 = "INSERT INTO user_info2 (DATE,id) "
+					+ "VALUE ('"+year+"-"+monthS+"-"+this.date+"','"+user_id+"');";
+			DBConnection.st.execute(query2);
+			System.out.println("welcome new user");
 		}
+		
 	}
 	public void setCurrentdayWeight(double weight) throws SQLException //오늘의 체중을 입력해준다
 	{
