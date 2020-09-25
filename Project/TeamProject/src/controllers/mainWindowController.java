@@ -1,36 +1,23 @@
 package controllers;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.ResourceBundle;
-
-import com.sun.glass.ui.Application;
-
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lib.CalendarInfos;
 import database.*;
-import lib.*;
-import popupcontrollers.dayPopupController;
 import popupcontrollers.popup;
 import popupcontrollers.DailyIntakePopupController;
-import popupcontrollers.userInfoPopupController;
 import popupcontrollers.DailyWorkoutPopupController;
 
 public class mainWindowController
@@ -59,19 +46,13 @@ public class mainWindowController
 	private Calendar cal;//현재시각 받아오는 라이브러리
 	private CalendarInfos calinfo;//달력의 계산을 대신해주는 클래스
 	private userinfo userin;
-	private user_days userda;
-	//////////////////////////////////////////
-	//private binarySearch<Object> bs;
-	//int[] arr = {1,3,5,7,38,932,7,31,5,7};
-	//String[] arr2 = {"가","거","나","누","나","늬","다람쥐","각","강","감","갓","갖","갇"};
-	////////////////////////////////////////
 	public void remove()//날짜지음
 	{
 		System.out.println("number of Grid childrens :"+GridCal.getChildren().size());
 		GridCal.getChildren().remove(8,GridCal.getChildren().size());
 		System.out.println("number of Grid childrens :"+GridCal.getChildren().size());
 	}
-	public String calc_bmr() throws SQLException
+	public String calc_bmr() throws SQLException//userda의 메소드를 사용하므로 sql예외처리해야함
 	{
 		double result;
 		double _tall = Double.parseDouble(userin.getTall());
@@ -81,9 +62,9 @@ public class mainWindowController
 		if(userin.getSex().equals("여자"))
 			sex=1;
 		if(sex==1)
-			result = 655.1+(9.56*_weight)+(1.85*_tall)-(4.68*_age);
+			result = 655.1+(9.56*_weight)+(1.85*_tall)-(4.68*_age);//여성 기초대사량 공식
 		else
-			result = 66.5+(13.7*_weight)+(5*_tall)-(6.8*_age);
+			result = 66.5+(13.7*_weight)+(5*_tall)-(6.8*_age);//남성
 		return Double.toString(result);
 	}
 	public void init(int year,int month)
@@ -151,7 +132,6 @@ public class mainWindowController
 	public void initialize() throws SQLException 
 	{
 		userin = new userinfo();
-		userda = new user_days();
 		rightB.setOnAction(event->increase_date());//다음달버튼
 		leftB.setOnAction(event->decrease_date());//이전달버튼
 		logout.setOnAction(event->logout());//로그아웃버튼

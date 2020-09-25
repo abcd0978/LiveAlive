@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
-
 import java.sql.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
@@ -25,9 +24,7 @@ public class signupController implements Initializable {
 	@FXML private TextField pw_fill;
 	@FXML private TextField pw_refill;
 	@FXML private TextField name_fill;
-	private DBConnection db;
 	private member mb;
-	private PreparedStatement pstmt = null;
 	private popup inputError;
 	@Override
 	public void initialize(java.net.URL loaction, ResourceBundle resources) 

@@ -3,11 +3,9 @@ package popupcontrollers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import database.userinfo;
 public class DailyIntakePopupController extends closable implements Initializable
 {
 	@FXML private Label year;

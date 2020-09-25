@@ -1,22 +1,16 @@
 package popupcontrollers;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import database.user_days;
+
 public class dayPopupController extends closable implements Initializable //팝업 컨트롤러를 상속받는다
 {
     @FXML private Label year;
@@ -39,11 +33,14 @@ public class dayPopupController extends closable implements Initializable //팝업
     @FXML private Button impt_order;
     @FXML private Button alpha_order;
     @FXML private Button saveButton;
+    @FXML private Button remove;
+    private String selected_labelS;
+    private Label selected_label;
     private int __year,__month,__date;
     private user_days ud;
     private String[] todos;
+   
     
-//    private Stage self;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
@@ -55,6 +52,13 @@ public class dayPopupController extends closable implements Initializable //팝업
 		impt_3.setToggleGroup(impt);
 		impt_4.setToggleGroup(impt);
 		impt_5.setToggleGroup(impt);
+		todo_label1.setOnMouseClicked(event->select_label(todo_label1.getText(),todo_label1));
+		todo_label2.setOnMouseClicked(event->select_label(todo_label2.getText(),todo_label2));
+		todo_label3.setOnMouseClicked(event->select_label(todo_label3.getText(),todo_label3));
+		todo_label4.setOnMouseClicked(event->select_label(todo_label4.getText(),todo_label4));
+		todo_label5.setOnMouseClicked(event->select_label(todo_label5.getText(),todo_label5));
+		todo_label6.setOnMouseClicked(event->select_label(todo_label6.getText(),todo_label6));
+		remove.setOnAction(event->{try{remove();}catch(SQLException e1){e1.printStackTrace();}});
 		impt_order.setOnAction(event->{try {show_impt();} catch (SQLException e) {e.printStackTrace();}});
 		alpha_order.setOnAction(event->{try {show_alpha();} catch (SQLException e) {e.printStackTrace();}});
 		saveButton.setOnAction(event->{try {save_action();} catch (SQLException e) {e.printStackTrace();}});
@@ -62,14 +66,27 @@ public class dayPopupController extends closable implements Initializable //팝업
 	public int Toggles()
 	{
 		RadioButton selectedButton = (RadioButton)impt.getSelectedToggle();
-		if(selectedButton != null)
+		if(selectedButton != null)//선택된 버튼이 있다면
 		{
-			String result = selectedButton.getId();
-			return Integer.parseInt(result);
+			return Integer.parseInt(selectedButton.getId());//선택된 버튼의 id를 정수로  가져옴
 		}
 		else
 		{
 			return 0;
+		}
+	}
+	public void select_label(String todo,Label lb)//클릭된 일정
+	{
+		if(selected_label == null)//라벨 선택이 아직 안되었다면
+		{
+			this.selected_labelS = todo;//스트링을 설정한다.
+			selected_label = lb;//라벨을 설정한다
+			selected_label.setStyle("-fx-background-color: #99FFCC");//라벨의 색상을 선택한다
+		}
+		else//선택되었다면
+		{
+			selected_label.setStyle(null);
+			selected_label = null;
 		}
 	}
 	public void save_action() throws SQLException
@@ -88,6 +105,15 @@ public class dayPopupController extends closable implements Initializable //팝업
 			warning.setText("");
 			ud.saveTodo(todo_tf.getText(),Toggles(),__year,__month,__date);
 			show_impt();
+		}
+	}
+	public void remove() throws SQLException
+	{
+		if(selected_label!=null)
+		{
+			ud.removeTodo(this.selected_labelS, __year, __month, __date);//삭제해줌
+			selected_label.setStyle(null);//색을 없앰
+			show_impt();//다시그려줌
 		}
 	}
 	public void show_impt() throws SQLException//중요도순

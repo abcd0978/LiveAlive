@@ -76,5 +76,6 @@
             <Label id="lb6" fx:id="todo_label6" prefHeight="19.0" prefWidth="351.0" text="일정6" />
          </children>
       </VBox>
+      <Button fx:id="remove" layoutX="470.0" layoutY="357.0" mnemonicParsing="false" text="삭제" />
    </children>
 </AnchorPane>

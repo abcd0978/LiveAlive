@@ -8,10 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-/**
- * @author abcd0
- *
- */
 public class fxmlHandler {
 	FXMLLoader loader;
 	Parent root;

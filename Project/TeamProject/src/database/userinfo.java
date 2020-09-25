@@ -28,13 +28,13 @@ public class userinfo extends member
 		float result = 0;
 		String query = "SELECT * FROM member "
 				+"WHERE id = '"+user_id+"';";
-		if(st.execute(query))
+		if(DBConnection.st.execute(query))
 		{
-			rs = st.getResultSet();
+			DBConnection.rs = DBConnection.st.getResultSet();
 		}
-		while(rs.next())
+		while(DBConnection.rs.next())
 		{
-		result = rs.getFloat("tall");
+		result = DBConnection.rs.getFloat("tall");
 		}
 		if(result == 0.0)
 		{
@@ -46,20 +46,20 @@ public class userinfo extends member
 	{
 		String query = "UPDATE member SET"+" tall ='"+tall
 				+"' WHERE id ='"+user_id+"';";
-		st.execute(query);
+		DBConnection.st.execute(query);
 	}
 	public String getAge() throws SQLException
 	{
 		int result = 0;
 		String query = "SELECT * FROM member "
 				+"WHERE id = '"+user_id+"';";
-		if(st.execute(query))
+		if(DBConnection.st.execute(query))
 		{
-			rs = st.getResultSet();
+			DBConnection.rs = DBConnection.st.getResultSet();
 		}
-		while(rs.next())
+		while(DBConnection.rs.next())
 		{
-			result = rs.getInt("age");
+			result = DBConnection.rs.getInt("age");
 		}
 		if(result == 0)
 		{
@@ -72,13 +72,13 @@ public class userinfo extends member
 		int result = 1;//1이 여성 
 		String query = "SELECT * FROM member "
 				+"WHERE id = '"+user_id+"';";
-		if(st.execute(query))
+		if(DBConnection.st.execute(query))
 		{
-			rs = st.getResultSet();
+			DBConnection.rs = DBConnection.st.getResultSet();
 		}
-		while(rs.next())
+		while(DBConnection.rs.next())
 		{
-			result = rs.getInt("sex");
+			result = DBConnection.rs.getInt("sex");
 		}
 		return result==1 ? "여성" : "남성" ;
 	}
@@ -86,13 +86,13 @@ public class userinfo extends member
 	{
 		String query = "UPDATE member SET"+" age ='"+age
 				+"' WHERE id ='"+user_id+"';";
-		st.execute(query);
+		DBConnection.st.execute(query);
 	}
 	public void setSex(int sex) throws SQLException//0은 남성, 1은 여성이다
 	{
 		String query = "UPDATE member SET"+" sex ='"+sex
 				+"' WHERE id ='"+user_id+"';";
-		st.execute(query);
+		DBConnection.st.execute(query);
 	}
 	public String getResentWeight() throws SQLException//최근에 입력한 체중을 리턴한다 
 	{
@@ -100,15 +100,15 @@ public class userinfo extends member
 		String query = "SELECT * FROM user_info2 "
 				+"WHERE id = '"+user_id
 				+"' ORDER BY DATE DESC;";
-		if(st.execute(query))
+		if(DBConnection.st.execute(query))
 		{
-			rs = st.getResultSet();
+			DBConnection.rs = DBConnection.st.getResultSet();
 		}
-		while(rs.next())
+		while(DBConnection.rs.next())
 		{
-			if(!rs.getString("weight").equals("0.0"))
+			if(!DBConnection.rs.getString("weight").equals("0.0"))
 			{
-				weight = rs.getString("weight");
+				weight = DBConnection.rs.getString("weight");
 				break;
 			}
 		}
@@ -120,18 +120,18 @@ public class userinfo extends member
 		String query = "SELECT * FROM user_info2 "//현재 접속한 유저의 user_info를 날짜순으로 나열하는 쿼리문
 				+"WHERE id = '"+user_id
 				+"' ORDER BY DATE DESC;";
-		if(st.execute(query))
+		if(DBConnection.st.execute(query))
 		{
-			rs = st.getResultSet();
+			DBConnection.rs = DBConnection.st.getResultSet();
 		}
-		rs.next();
-		date = rs.getString("date");
+		DBConnection.rs.next();
+		date = DBConnection.rs.getString("date");
 		if(!date.equals(year+"-"+monthS+"-"+(this.date)))//만약 가장 최근에 생성한 user_info데이터가 현재가 아니라면,날짜만있고 전부 NULL로 데이터를 생성한다
 		{
 			String query2 = "INSERT INTO user_info2 (DATE,id) "
 					+ "VALUE ('"+year+"-"+monthS+"-"+this.date+"','"+user_id+"');";
 			System.out.println(query2);
-			if(st.execute(query2))
+			if(DBConnection.st.execute(query2))
 			{
 				System.out.println("new day data inserted");
 			}
@@ -147,7 +147,6 @@ public class userinfo extends member
 				+" SET weight = '"+weight
 				+"' WHERE DATE = '"+year+"-"+monthS+"-"+this.date+"' AND id ='"+user_id+"';";
 		System.out.println(query);
-		st.execute(query);
-		//System.out.println("current weight updated");
+		DBConnection.st.execute(query);
 	}
 }
