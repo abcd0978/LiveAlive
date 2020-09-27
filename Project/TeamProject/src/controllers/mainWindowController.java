@@ -38,6 +38,7 @@ public class mainWindowController
 	@FXML private Button daily_intake;//섭취팝업버튼
 	@FXML private Button user_info;//회원정보 버튼
 	@FXML private Button daily_workout;//운동팝업버튼
+	@FXML private Button refresh;
 	private popup workoutPopup;//운동팝업
 	private popup intakePopup;//섭취팝업
 	private popup userinfoPopup;//회원정보팝업
@@ -46,6 +47,7 @@ public class mainWindowController
 	private Calendar cal;//현재시각 받아오는 라이브러리
 	private CalendarInfos calinfo;//달력의 계산을 대신해주는 클래스
 	private userinfo userin;
+	private foods fs;
 	public void remove()//날짜지음
 	{
 		System.out.println("number of Grid childrens :"+GridCal.getChildren().size());
@@ -132,6 +134,8 @@ public class mainWindowController
 	public void initialize() throws SQLException 
 	{
 		userin = new userinfo();
+		fs = new foods();
+		refresh.setOnAction(event->refresh_action());
 		rightB.setOnAction(event->increase_date());//다음달버튼
 		leftB.setOnAction(event->decrease_date());//이전달버튼
 		logout.setOnAction(event->logout());//로그아웃버튼
@@ -153,7 +157,7 @@ public class mainWindowController
 		tall.setText(userin.getTall());//메인화면에 키가 나오게한다
 		age.setText(userin.getAge());//메인화면에 나이가 나오게한다
 		sex.setText(userin.getSex());//메인화면에 성별이 나오게한다
-		bmr.setText(calc_bmr());
+		bmr.setText(calc_bmr());//메인화면에 기초대사량이 나오게한다.
 		weight.setText(userin.getResentWeight());//메인화면에 최근에입력한 체중이 나오게한다.
 		user_name.setText(userin.getName());//메인화면에 사용자의 이름이 나오게한다.
 	}
@@ -236,6 +240,26 @@ public class mainWindowController
 		try {
 			todo_seeker();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void refresh_action()
+	{
+		try
+		{
+			init(__year,__month);//달력이 그려진다.
+			write_date(__year,__month);//달력에 날짜가 그려진다.
+			today();//달력에 오늘이 표시되게끔 해준다0
+			todo_seeker();//일정이있는날은 빨간색으로 표시
+			tall.setText(userin.getTall());//메인화면에 키가 나오게한다
+			age.setText(userin.getAge());//메인화면에 나이가 나오게한다
+			sex.setText(userin.getSex());//메인화면에 성별이 나오게한다
+			bmr.setText(calc_bmr());//메인화면에 기초대사량이 나오게한다.
+			weight.setText(userin.getResentWeight());//메인화면에 최근에입력한 체중이 나오게한다.
+			user_name.setText(userin.getName());//메인화면에 사용자의 이름이 나오게한다.
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 	}

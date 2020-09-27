@@ -6,7 +6,7 @@ public class member{
 
 	private static String __name;//사용자 이름 저장됨
 	private static int pk;
-	private static DBConnection db;
+	private DBConnection db;
 	public member()
 	{
 		db = DBConnection.getInstance();

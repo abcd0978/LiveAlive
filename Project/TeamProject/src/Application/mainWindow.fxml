@@ -116,6 +116,7 @@
             </HBox>
             <Button fx:id="daily_intake" layoutX="888.0" layoutY="84.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="130.0" text="하루섭취" />
             <Button fx:id="daily_workout" layoutX="888.0" layoutY="148.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="130.0" text="하루운동" />
+            <Button fx:id="refresh" layoutX="1052.0" layoutY="757.0" mnemonicParsing="false" text="새로고침" />
          </children>
       </AnchorPane>
    </children>

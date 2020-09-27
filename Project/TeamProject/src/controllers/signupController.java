@@ -7,6 +7,7 @@ import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,12 +21,14 @@ public class signupController implements Initializable {
 	@FXML private Button create_account;
 	@FXML private Button is_duplicate;
 	@FXML private Button back;
-	@FXML private TextField id_fill;
-	@FXML private TextField pw_fill;
-	@FXML private TextField pw_refill;
-	@FXML private TextField name_fill;
-	private member mb;
-	private popup inputError;
+	@FXML private TextField id_fill;//id쓰는칸
+	@FXML private TextField pw_fill;//패스워드 쓰는칸
+	@FXML private TextField pw_refill;//패스워드 재입력하느칸
+	@FXML private TextField name_fill;//이름쓰는칸
+	@FXML private Label warning;//경고 라벨
+	private boolean dup_test;//중복확인을 했는지 안했는지 확인하는 변수
+	private member mb;//member 클래스 매개변수
+	private popup inputError;//에러
 	@Override
 	public void initialize(java.net.URL loaction, ResourceBundle resources) 
 	{
@@ -33,6 +36,7 @@ public class signupController implements Initializable {
 		back.setOnAction(event->goBack(event));
 		is_duplicate.setOnAction(event->isDuplicate(event));
 		create_account.setOnAction(event->createAccount(event));
+		dup_test = false;
 	}
 	
 	public void goBack(ActionEvent e)
@@ -53,12 +57,17 @@ public class signupController implements Initializable {
 	public void isDuplicate(ActionEvent e)
 	{
 		try {
-			if(mb.isId_dup(id_fill.getText())) {
+			if(mb.isId_dup(id_fill.getText())) 
+			{
 				System.out.println("isDuplicate");
-				inputError = new popup("중복된 아이디");
+				inputError = new popup("중복확인");
 				inputError.setLocation("/Application/signupIddupPopup.fxml");
 				inputError.show();
 				return;
+			}
+			else
+			{
+				dup_test = true;
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -88,7 +97,7 @@ public class signupController implements Initializable {
 			WrongPass();
 			return;
 		}
-		
+		//////////////////////////////////패스워드 재입력 일지확인
 		if(id_fill.getText().isEmpty() || pw_fill.getText().isEmpty() || name_fill.getText().isEmpty() || pw_refill.getText().isEmpty()) {
 			System.out.println("id_fill or pw_fill or pw_refill or name_fill isEmpty");
 			InputEmpty();
@@ -100,7 +109,10 @@ public class signupController implements Initializable {
 		System.out.println("name: " + name_fill.getText());
 		
 		try {
-			mb.register(id_fill.getText(), pw_fill.getText(), name_fill.getText());
+			if(dup_test == true)
+				mb.register(id_fill.getText(), pw_fill.getText(), name_fill.getText());
+			else
+				warning.setText("아이디 중복체크를 해주세요");
 		}catch(Exception e1) {
 			e1.printStackTrace();
 		}

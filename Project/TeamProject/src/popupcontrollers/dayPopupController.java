@@ -104,6 +104,7 @@ public class dayPopupController extends closable implements Initializable //ÆË¾÷
 			System.out.printf("toggle :%d  String: %s",Toggles(),todo_tf.getText());
 			warning.setText("");
 			ud.saveTodo(todo_tf.getText(),Toggles(),__year,__month,__date);
+			todo_tf.setText("");
 			show_impt();
 		}
 	}
