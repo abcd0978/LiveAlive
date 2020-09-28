@@ -18,14 +18,14 @@ public class binarySearch
  
         while (right >= left) 
         {
-            mid = (right + left) / 2;
+            mid = (right + left) / 2;//중앙값
             
-            if (key == arr[mid].getName()) 
+            if (key == arr[mid].getName())//같으면 반환
             {
                 System.out.println(key + "is here" + mid);
                 break;
             }
-            if (key.compareTo(arr[mid].getName())<0) 
+            if (key.compareTo(arr[mid].getName())>0) 
             {
                 right = mid - 1;
             } 

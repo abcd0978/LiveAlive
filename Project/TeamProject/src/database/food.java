@@ -21,10 +21,11 @@ public class food
 			return this.carb.doubleValue();
 		else if(bywhat==3)
 			return this.protein.doubleValue();
-		else if(bywhat==4)
+		else if(bywhat==4) 
 			return this.fat.doubleValue();
-		else 
-			return this.getName().toString();
+		else
+			return this.name.toString();
+		
 	}
 	public void setNutinfo(double data,int bywhat)//1.열량2.탄수화물3.단백질4.지방
 	{
@@ -37,8 +38,6 @@ public class food
 		else if(bywhat==1)
 			this.fat = new SimpleDoubleProperty(data);
 	}
-	
-	
 	public void setName(String name)//이름
 	{
 		this.name = new SimpleStringProperty(name);
@@ -67,7 +66,6 @@ public class food
 	{
 		this.carb = new SimpleDoubleProperty(carb);
 	}
-	
 	public double getKcal()
 	{
 		return this.kcal.get();

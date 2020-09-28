@@ -48,5 +48,20 @@
             </Label>
          </children>
       </HBox>
+      <TableView fx:id="movetable" layoutX="23.0" layoutY="72.0" prefHeight="200.0" prefWidth="287.0">
+        <columns>
+          <TableColumn fx:id="name" prefWidth="174.0" text="이름" />
+          <TableColumn fx:id="kcal" prefWidth="112.0" text="시간당열량" />
+        </columns>
+      </TableView>
+      <Button fx:id="sort_kcal" layoutX="320.0" layoutY="72.0" mnemonicParsing="false" text="열량순" />
+      <TextField fx:id="name_T" layoutX="23.0" layoutY="318.0" prefHeight="29.0" prefWidth="95.0" />
+      <TextField fx:id="kcal_T" layoutX="148.0" layoutY="318.0" prefHeight="29.0" prefWidth="47.0" />
+      <Label layoutX="23.0" layoutY="299.0" text="이름" />
+      <Label layoutX="148.0" layoutY="299.0" text="열량" />
+      <Button fx:id="update" layoutX="23.0" layoutY="357.0" mnemonicParsing="false" text="추가" />
+      <Button fx:id="saveButton" layoutX="320.0" layoutY="243.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="166.0" text="오늘한운동으로 추가" />
+      <Button fx:id="remove" layoutX="148.0" layoutY="357.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="50.0" text="삭제" />
+      <Label fx:id="status" layoutX="23.0" layoutY="272.0" prefHeight="19.0" prefWidth="490.0" />
    </children>
 </AnchorPane>

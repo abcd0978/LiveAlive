@@ -29,6 +29,11 @@ public class calendarDaysController implements Initializable//캘린더의 각각의 날
 		pop = new popup("일정");
 		pop.setLocation("/Application/dayPopup.fxml");
 		((dayPopupController)pop.getController()).setText(day_year, day_month, day_day);
+		try {
+			((dayPopupController)pop.getController()).setUserInfo(Integer.toString(day_year),Integer.toString(day_month),Integer.toString(day_day));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		((dayPopupController)pop.getController()).setInteger(day_year, day_month, day_day);
 		pop.show();//보이게함
 	}

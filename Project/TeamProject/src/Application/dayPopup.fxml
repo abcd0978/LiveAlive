@@ -66,7 +66,7 @@
       <Button fx:id="impt_order" layoutX="512.0" layoutY="186.0" mnemonicParsing="false" text="중요도순" />
       <Button fx:id="alpha_order" layoutX="512.0" layoutY="251.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="80.0" text="가나다순" />
       <Label fx:id="warning" layoutX="371.0" layoutY="156.0" prefHeight="19.0" prefWidth="165.0" text="Label" textFill="RED" />
-      <VBox fx:id="Labelcontainer" layoutX="14.0" layoutY="180.0" prefHeight="200.0" prefWidth="407.0" spacing="16.0">
+      <VBox layoutX="14.0" layoutY="180.0" prefHeight="200.0" prefWidth="407.0" spacing="16.0">
          <children>
             <Label id="lb1" fx:id="todo_label1" prefHeight="19.0" prefWidth="351.0" text="일정1(원래는 이글씨가 안보여야함)" />
             <Label id="lb2" fx:id="todo_label2" prefHeight="19.0" prefWidth="351.0" text="일정2" />
@@ -77,5 +77,9 @@
          </children>
       </VBox>
       <Button fx:id="remove" layoutX="470.0" layoutY="357.0" mnemonicParsing="false" text="삭제" />
+      <Label layoutX="14.0" layoutY="147.0" text="섭취량" />
+      <Label layoutX="195.0" layoutY="147.0" text="운동량" />
+      <Label fx:id="intake" layoutX="59.0" layoutY="147.0" prefHeight="19.0" prefWidth="131.0" text="Label" />
+      <Label fx:id="move" layoutX="244.0" layoutY="147.0" prefHeight="19.0" prefWidth="89.0" text="Label" />
    </children>
 </AnchorPane>

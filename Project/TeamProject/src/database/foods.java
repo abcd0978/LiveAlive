@@ -25,25 +25,25 @@ public class foods
 	public food[] setFoodInfos() throws SQLException//객체배열에 모든 음식정보를 받아옴
 	{
 		int i = numberOfFoods();
-		food[] temp = new food[i];//db에 저장된 음식의 수만큼 생성한다.
+		fd = new food[i];
+		System.out.println(i);
 		String query = "SELECT * FROM foods;";
 		DBConnection.st.execute(query);
 		DBConnection.rs = DBConnection.st.getResultSet();
-		System.out.println(i);
 		i=0;
 		while(DBConnection.rs.next())
-		{
-			temp[i] = new food();
-			temp[i].setName(DBConnection.rs.getString("name"));
-			temp[i].setSerM(Integer.parseInt(DBConnection.rs.getString("serve_amount")));
-			temp[i].setUnit( DBConnection.rs.getString("unit"));
-			temp[i].setKcal(Double.parseDouble(DBConnection.rs.getString("kcal")));
-			temp[i].setProtein(Double.parseDouble(DBConnection.rs.getString("protein")));
-			temp[i].setFat(Double.parseDouble(DBConnection.rs.getString("fat")));
-			temp[i].setCarb(Double.parseDouble(DBConnection.rs.getString("carb")));
+		{ 
+			fd[i] = new food();
+			fd[i].setName(DBConnection.rs.getString("name"));
+			fd[i].setSerM(Integer.parseInt(DBConnection.rs.getString("serve_amount")));
+			fd[i].setUnit(DBConnection.rs.getString("unit"));
+			fd[i].setKcal(Double.parseDouble(DBConnection.rs.getString("kcal")));
+			fd[i].setProtein(Double.parseDouble(DBConnection.rs.getString("protein")));
+			fd[i].setFat(Double.parseDouble(DBConnection.rs.getString("fat")));
+			fd[i].setCarb(Double.parseDouble(DBConnection.rs.getString("carb")));
 			i++;
 		}
-		return temp;
+		return fd;
 	}
 	public food[] SLSortBy(food[] arr,int bywhat) throws SQLException//1은 열량순,2는 탄수화물,3은 단백질,4는 지방
 	{

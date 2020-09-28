@@ -8,20 +8,24 @@ public class userinfo extends member
 	private Calendar cal;
 	private int year,month,date;
 	private int user_id;
-	String monthS;
 	public userinfo()
 	{
 		cal = Calendar.getInstance();
 		mb = new member();
-		this.year = cal.get(Calendar.YEAR);
-		this.month = cal.get(Calendar.MONTH)+1;
-		this.date = cal.get(Calendar.DATE);
+		this.year = cal.get(Calendar.YEAR);//현재의 년도
+		this.month = cal.get(Calendar.MONTH)+1;//현재의달
+		this.date = cal.get(Calendar.DATE);//현대의 날짜
 		System.out.println(mb.getName()+"의 정보 " + "키번호 : "+mb.getid());
 		user_id = mb.getid();
+	}
+	public String getMonth(int month)
+	{
+		String monthS;
 		if(this.month > 9)//db에서 는 1~9월에 0이 붙어서 출력되므로 1~9월에는 앞에 0을 붙인 monthS를 사용한다. 
 			monthS = "1"+Integer.toString((this.month%10));
 		else
 			 monthS="0"+Integer.toString(this.month); 
+		return monthS;
 	}
 	public String getTall() throws SQLException//키를 얻는 메소드
 	{
@@ -128,10 +132,10 @@ public class userinfo extends member
 		{
 			System.out.println(DBConnection.rs);
 			date = DBConnection.rs.getString("date");//가장최근의 데이터를 받아온다
-			if(!date.equals(year+"-"+monthS+"-"+(this.date)))//만약 가장 최근에 생성한 user_info데이터가 현재가 아니라면,날짜만있고 전부 NULL로 데이터를 생성한다
+			if(!date.equals(year+"-"+getMonth(month)+"-"+(this.date)))//만약 가장 최근에 생성한 user_info데이터가 현재가 아니라면,날짜만있고 전부 NULL로 데이터를 생성한다
 				{
 				String query2 = "INSERT INTO user_info2 (DATE,id) "
-						+ "VALUE ('"+year+"-"+monthS+"-"+this.date+"','"+user_id+"');";
+						+ "VALUE ('"+year+"-"+getMonth(month)+"-"+this.date+"','"+user_id+"');";
 				System.out.println(query2);
 				DBConnection.st.execute(query2);
 				System.out.println("hello ");
@@ -143,7 +147,7 @@ public class userinfo extends member
 		else//다음데이터가 존재하지않으면 신규유저
 		{
 			String query2 = "INSERT INTO user_info2 (DATE,id) "
-					+ "VALUE ('"+year+"-"+monthS+"-"+this.date+"','"+user_id+"');";
+					+ "VALUE ('"+year+"-"+getMonth(month)+"-"+this.date+"','"+user_id+"');";
 			DBConnection.st.execute(query2);
 			System.out.println("welcome new user");
 		}
@@ -153,7 +157,45 @@ public class userinfo extends member
 	{
 		String query = "UPDATE user_info2"
 				+" SET weight = '"+weight
-				+"' WHERE DATE = '"+year+"-"+monthS+"-"+this.date+"' AND id ='"+user_id+"';";
+				+"' WHERE DATE = '"+year+"-"+getMonth(month)+"-"+this.date+"' AND id ='"+user_id+"';";
 		DBConnection.st.execute(query);
+	}
+	public void updateCurrentIntake(double intake) throws SQLException //오늘의 오늘 섭취한 음식으로 등록될때마다 더한다.
+	{
+		String query = "UPDATE user_info2"
+				+" SET intake = intake +"+intake
+				+" WHERE DATE = '"+year+"-"+getMonth(month)+"-"+this.date+"' AND id ='"+user_id+"';";
+		DBConnection.st.execute(query);
+	}
+	public void updateCurrentMoves(int moves) throws SQLException
+	{
+		String query = "UPDATE user_info2"
+				+" SET moves = moves +"+moves
+				+" WHERE DATE = '"+year+"-"+getMonth(month)+"-"+this.date+"' AND id ='"+user_id+"';";
+		DBConnection.st.execute(query);
+	}
+	public String getIntake(String year,String month,String date) throws SQLException
+	{
+		String query = "SELECT intake FROM user_info2 WHERE"
+				+" date = '"+year+"-"+month+"-"+date+"' AND id = '"+user_id+"';";//user_info테이블에서 해당하는 연월일의 정보를 가져온다
+		System.out.println(query);
+		DBConnection.st.execute(query);
+		DBConnection.rs = DBConnection.st.getResultSet();
+		if(DBConnection.rs.next())
+			return DBConnection.rs.getString("intake");
+		else
+			return "0";
+	}
+	public String getMove(String year,String month,String date) throws SQLException
+	{
+		String query = "SELECT moves FROM user_info2 WHERE "
+				+"date = '"+year+"-"+month+"-"+date+"' AND id = '"+user_id+"';";//user_info테이블에서 해당하는 연월일의 정보를 가져온다
+		System.out.println(query);
+		DBConnection.st.execute(query);
+		DBConnection.rs = DBConnection.st.getResultSet();
+		if(DBConnection.rs.next())
+			return DBConnection.rs.getString("moves");
+		else
+			return "0";
 	}
 }

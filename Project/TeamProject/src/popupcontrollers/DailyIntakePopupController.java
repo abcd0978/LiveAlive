@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import database.food;
 import database.foods;
+import database.userinfo;
 import lib.binarySearch;
 import lib.selctionSort;
 public class DailyIntakePopupController extends closable implements Initializable
@@ -38,17 +39,18 @@ public class DailyIntakePopupController extends closable implements Initializabl
     @FXML private Button Sort_Fat;
     @FXML private Button searchButton;
     @FXML private Button saveButton;
+    private userinfo ui;
     private selctionSort ss;
     private binarySearch bs;
     private food[] fd;
     private foods fds;
-    private ObservableList<food> foods; 
-    
+    private ObservableList<food> foods;
     public void initialize(URL location, ResourceBundle resources) 
     {
 		super.initialize(location, resources);
 		ss = new selctionSort();//셀렉션소트
 		bs = new binarySearch();
+		ui = new userinfo();
 		fds = new foods();//음식객체 연산처리클래스
 		try {fd = fds.setFoodInfos();}catch(SQLException e){e.printStackTrace();}
 		foods = FXCollections.observableArrayList(fd);
@@ -58,7 +60,7 @@ public class DailyIntakePopupController extends closable implements Initializabl
 		Sort_Prot.setOnAction(event->{try{Sort(3);}catch(SQLException e){e.printStackTrace();}});
 		Sort_Fat.setOnAction(event->{try{Sort(4);}catch(SQLException e){e.printStackTrace();}});
 		searchButton.setOnAction(event->Search());
-		saveButton.setOnAction(event->saveAction());
+		saveButton.setOnAction(event->{try{saveAction();}catch(SQLException e){e.printStackTrace();}});
 		name.setCellValueFactory(new PropertyValueFactory<>("Name"));
 		kcal.setCellValueFactory(new PropertyValueFactory<>("Kcal"));
 		unit.setCellValueFactory(new PropertyValueFactory<>("Unit"));
@@ -67,8 +69,7 @@ public class DailyIntakePopupController extends closable implements Initializabl
 		protein.setCellValueFactory(new PropertyValueFactory<>("Protein"));
 		fat.setCellValueFactory(new PropertyValueFactory<>("Fat"));
 	}
-    
-	public void Sort(int bywhat) throws SQLException//
+	public void Sort(int bywhat) throws SQLException
     {
 		this.fd = fds.SLSortBy(this.fd,bywhat);
     	foods = FXCollections.observableArrayList(this.fd);
@@ -76,18 +77,18 @@ public class DailyIntakePopupController extends closable implements Initializabl
     }
 	public void Search()
 	{
-		food temp;
+		food temp = null;
 		String str = this.searchBar.getText();
-		temp = bs.binary_food(this.fd,str,5);
-		System.out.println("출력한것:"+temp.getName());
+		temp = bs.binary_food(fd, str, 5);
 		foods = FXCollections.observableArrayList(temp);
 		foodtable.setItems(foods);
 	}
-	public void saveAction()
+	public void saveAction() throws SQLException
 	{
 		if(foodtable.getSelectionModel().getSelectedItem()!=null)
 		{
-			System.out.println(foodtable.getSelectionModel().getSelectedItem().getName());
+			ui.updateCurrentIntake(foodtable.getSelectionModel().getSelectedItem().getKcal());//섭취한 칼로리를 저장한다.
+			status.setText(ui.getName()+"님 "+month.getText()+"월"+date.getText()+"일 "+foodtable.getSelectionModel().getSelectedItem().getKcal()+"칼로리 추가");
 		}		
 		else
 		{

@@ -1,6 +1,6 @@
 package lib;
 import database.food;
-public class selctionSort 
+public class selctionSort
 {
     public String[] sort_String(String[] data)//스트링 정렬
     {
@@ -55,7 +55,7 @@ public class selctionSort
             {
             	if(bywhat==5)
             	{
-            		 if(((String)data[min].getNutinfos(bywhat)).compareTo(((String)(data[j].getNutinfos(bywhat)))) > 0 )
+            		 if(((String)data[min].getNutinfos(bywhat)).compareTo(((String)(data[j].getNutinfos(bywhat)))) < 0 )
                      {
                          min = j;
                      }

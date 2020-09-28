@@ -10,6 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import database.user_days;
+import database.userinfo;
 
 public class dayPopupController extends closable implements Initializable //ÆË¾÷ ÄÁÆ®·Ñ·¯¸¦ »ó¼Ó¹Þ´Â´Ù
 {
@@ -29,6 +30,8 @@ public class dayPopupController extends closable implements Initializable //ÆË¾÷
     @FXML private Label todo_label4;
     @FXML private Label todo_label5;
     @FXML private Label todo_label6;
+    @FXML private Label intake;
+    @FXML private Label move;
     @FXML private TextField todo_tf;
     @FXML private Button impt_order;
     @FXML private Button alpha_order;
@@ -37,6 +40,7 @@ public class dayPopupController extends closable implements Initializable //ÆË¾÷
     private String selected_labelS;
     private Label selected_label;
     private int __year,__month,__date;
+    private userinfo ui;
     private user_days ud;
     private String[] todos;
    
@@ -46,6 +50,7 @@ public class dayPopupController extends closable implements Initializable //ÆË¾÷
 	{
 		super.initialize(location, resources);
 		ud = new user_days();
+		ui = new userinfo();
 		warning.setText("");
 		impt_1.setToggleGroup(impt);//Åä±Û ±×·ì ¼³Á¤
 		impt_2.setToggleGroup(impt);
@@ -62,6 +67,11 @@ public class dayPopupController extends closable implements Initializable //ÆË¾÷
 		impt_order.setOnAction(event->{try {show_impt();} catch (SQLException e) {e.printStackTrace();}});
 		alpha_order.setOnAction(event->{try {show_alpha();} catch (SQLException e) {e.printStackTrace();}});
 		saveButton.setOnAction(event->{try {save_action();} catch (SQLException e) {e.printStackTrace();}});
+	}
+	public void setUserInfo(String year,String month,String date) throws SQLException
+	{
+		move.setText(ui.getMove(year, month, date)+"kcal");
+		intake.setText(ui.getIntake(year, month, date)+"kcal");
 	}
 	public int Toggles()
 	{
@@ -131,12 +141,12 @@ public class dayPopupController extends closable implements Initializable //ÆË¾÷
 	public void setInteger(int year,int month,int date)
 	{
 		this.__year = year;
-		this.__month =month;
+		this.__month = month;
 		this.__date = date;
 		try 
 		{
 			show_impt();
-		} catch (SQLException e) 
+		} catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
