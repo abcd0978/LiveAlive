@@ -6,39 +6,26 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.rootController">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.rootController">
    <children>
-      <Label layoutX="438.0" layoutY="52.0" prefHeight="144.0" prefWidth="200.0" text="살자,">
+      <ImageView fitHeight="800" fitWidth="1300" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/title.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="1253.0" layoutY="772.0" prefHeight="29.0" prefWidth="47.0" text="V.1.5" />
+      <TextField fx:id="user_id" layoutX="320.0" layoutY="506.0" prefHeight="29.0" prefWidth="202.0" />
+      <PasswordField fx:id="user_pass" layoutX="320.0" layoutY="548.0" prefHeight="29.0" prefWidth="202.0" />
+      <Button fx:id="login" layoutX="284.0" layoutY="604.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="102.0" text="Login">
          <font>
-            <Font name="HyhwpEQ" size="86.0" />
+            <Font name="Webdings" size="25.0" />
          </font>
-      </Label>
-      <Label layoutX="482.0" layoutY="124.0" prefHeight="144.0" prefWidth="380.0" text="건강하게.">
-         <font>
-            <Font size="86.0" />
-         </font>
-      </Label>
-      <Label layoutX="429.0" layoutY="462.0" prefHeight="45.0" prefWidth="40.0" text="ID">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="429.0" layoutY="516.0" prefHeight="45.0" prefWidth="139.0" text="PASSWORD">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="user_id" layoutX="575.0" layoutY="470.0" prefHeight="29.0" prefWidth="276.0" />
-      <PasswordField fx:id="user_pass" layoutX="575.0" layoutY="524.0" prefHeight="29.0" prefWidth="276.0" />
-      <Button fx:id="login" layoutX="587.0" layoutY="570.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="102.0" text="Login">
+      </Button>
+      <Button fx:id="signup" layoutX="284.0" layoutY="660.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="102.0" text="Sign">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="signup" layoutX="587.0" layoutY="626.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="102.0" text="Sign">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
+      <Label layoutX="120.0" layoutY="763.0" prefHeight="19.0" prefWidth="431.0" text="Made by Myongji Univ. Computer Engineering Team UNIQ." />
    </children>
 </AnchorPane>

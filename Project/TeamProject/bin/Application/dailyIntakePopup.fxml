@@ -1,19 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="popupcontrollers.DailyIntakePopupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="popupcontrollers.DailyIntakePopupController">
    <children>
-      <Button fx:id="closeButton" layoutX="536.0" layoutY="357.0" mnemonicParsing="false" text="닫기" />
-      <Label layoutX="128.0" layoutY="7.0" prefHeight="42.0" prefWidth="322.0" text="회원정보 입력">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <RadioButton layoutX="71.0" layoutY="328.0" mnemonicParsing="false" text="남성" />
+      <ImageView fitHeight="500" fitWidth="850" pickOnBounds="true" preserveRatio="true">
+         	<image>
+           		<Image url="@../resources/intake.jpg" />
+         	</image>
+      </ImageView>
+      <Button fx:id="closeButton" layoutX="755.0" layoutY="470.0" mnemonicParsing="false" text="닫기" />
+        <HBox prefHeight="42.0" prefWidth="473.0" layoutX="40.0" layoutY="110.0" >
+         <children>
+            <Label fx:id="year" prefHeight="60.0" prefWidth="50.0" text="redtf" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="64.0" prefWidth="30.0" text="년" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="month" prefHeight="57.0" prefWidth="50.0" text="yuhiu" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="57.0" prefWidth="30.0" text="월" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="date" prefHeight="42.0" prefWidth="50.0" text="frty" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="73.0" prefWidth="30.0" text="일" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+      
+         </children>
+      </HBox>
+      <Button fx:id="searchButton" layoutX="260.0" layoutY="172.5" mnemonicParsing="false" text="이름탐색" />
+      <TextField fx:id="searchBar" layoutX="50.0" layoutY="172.5" prefHeight="29.0" prefWidth="207.0" />
+      <TableView fx:id="foodtable" layoutX="50.0" layoutY="212.5" prefHeight="200.0" prefWidth="740.0">
+        <columns>
+          <TableColumn fx:id="name" prefWidth="139.0" text="이름" />
+            <TableColumn fx:id="serve" prefWidth="100.0" text="1회 제공량" />
+          <TableColumn fx:id="unit" minWidth="0.0" prefWidth="43.0" text="g/ml" />
+            <TableColumn fx:id="kcal" prefWidth="100.0" text="열량" />
+            <TableColumn fx:id="carb" minWidth="0.0" prefWidth="101.0" text="탄수화물" />
+            <TableColumn fx:id="protein" prefWidth="130.0" text="단백질" />
+            <TableColumn fx:id="fat" prefWidth="120.0" text="지방" />
+        </columns>
+      </TableView>
+      <Button fx:id="saveButton" layoutX="50.0" layoutY="422.5" mnemonicParsing="false" text="오늘 먹은 음식으로 설정" />
+      <Button fx:id="Sort_Kcal" layoutX="515.0" layoutY="172.5" mnemonicParsing="false" text="열량순" />
+      <Button fx:id="Sort_Carb" layoutX="585" layoutY="172.5" mnemonicParsing="false" text="탄수순" />
+      <Button fx:id="Sort_Prot" layoutX="655.0" layoutY="172.5" mnemonicParsing="false" text="단백순" />
+      <Button fx:id="Sort_Fat" layoutX="725.0" layoutY="172.5" mnemonicParsing="false" text="지방순" />
+      <Label fx:id="status" layoutX="218.0" layoutY="320.0" prefHeight="19.0" prefWidth="336.0" />
    </children>
 </AnchorPane>

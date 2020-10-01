@@ -6,7 +6,6 @@ package popupcontrollers;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import lib.fxmlHandler;
-import database.DBConnection;
 /**
  * @author abcd0
  *
@@ -15,8 +14,6 @@ public class popup {
 	protected fxmlHandler handler;
 	protected Initializable controller;
 	protected Stage window;
-	protected DBConnection db;
-	
 	public popup(String title) 
 	{
 		window = new Stage();
@@ -35,6 +32,11 @@ public class popup {
 		controller = handler.getController();
 		((closable)controller).setStage(window);
 		window.setScene(handler.getScene());
+	}
+	public void setSize(int width,int height)
+	{
+		window.setWidth(width);
+		window.setHeight(height);
 	}
 	public Initializable getController() 
 	{
