@@ -39,17 +39,11 @@ public class mainWindowController
 	@FXML private Button user_info;//회원정보 버튼
 	@FXML private Button daily_workout;//운동팝업버튼
 	@FXML private Button refresh;
-<<<<<<< HEAD
-	private popup workoutPopup;//운동팝업
-	private popup intakePopup;//섭취팝업
-	private popup userinfoPopup;//회원정보팝업
-=======
 	@FXML private Button health_info;//최신건강정보버튼
 	private popup workoutPopup;//운동팝업
 	private popup intakePopup;//섭취팝업
 	private popup userinfoPopup;//회원정보팝업
 	private popup healthinfoPopup;//최신건강정보팝업
->>>>>>> upstream/master
 	private int __year,__month,__date;//계산을위한 수
 	private List<calendarDaysController> daycon;//날짜컨트롤러 리스트
 	private Calendar cal;//현재시각 받아오는 라이브러리
@@ -150,10 +144,7 @@ public class mainWindowController
 		user_info.setOnAction(event->user_info());//사용자 정보입력 버튼
 		daily_intake.setOnAction(event->daily_intake());//사용자 일일섭취량 버튼
 		daily_workout.setOnAction(event->daily_workout());//사용자 일일운동량 버튼
-<<<<<<< HEAD
-=======
 		health_info.setOnAction(event->health_info());//최신 건강 정보 버튼
->>>>>>> upstream/master
 		cal = Calendar.getInstance();//캘린더 객체
 		__year = cal.get(Calendar.YEAR);
 		year.setText(Integer.toString(__year));
@@ -167,21 +158,13 @@ public class mainWindowController
 		todo_seeker();//일정이있는날은 빨간색으로 표시
 		userin.initUserInfo2();//사용자가 당일에 이 어플리케이션을 처음 들어갔다면,체중,일일섭취량,일일운동량을 기록할수있게해준다.
 		tall.setText(userin.getTall());//메인화면에 키가 나오게한다
-<<<<<<< HEAD
-		age.setText(userin.getAge());//메인화면에 나이가 나오게한다
-		sex.setText(userin.getSex());//메인화면에 성별이 나오게한다
-=======
 		age.setText("만 " + userin.getAge());//메인화면에 나이가 나오게한다
 		sex.setText((userin.getSex()));//메인화면에 성별이 나오게한다
->>>>>>> upstream/master
 		bmr.setText(calc_bmr());//메인화면에 기초대사량이 나오게한다.
 		weight.setText(userin.getResentWeight());//메인화면에 최근에입력한 체중이 나오게한다.
 		user_name.setText(userin.getName());//메인화면에 사용자의 이름이 나오게한다.
 	}
-<<<<<<< HEAD
-=======
 	//하루운동 팝업
->>>>>>> upstream/master
 	public void daily_workout()
 	{
 		System.out.println("운동버튼 눌림");
@@ -190,10 +173,7 @@ public class mainWindowController
 		((DailyWorkoutPopupController)workoutPopup.getController()).setText(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DATE));
 		workoutPopup.show();
 	}
-<<<<<<< HEAD
-=======
 	//하루섭취 팝업 
->>>>>>> upstream/master
 	public void daily_intake()
 	{
 		System.out.println("섭취버튼 눌림");
@@ -203,10 +183,7 @@ public class mainWindowController
 		System.out.println("섭취 컨트롤러 로드됨");
 		intakePopup.show();
 	}
-<<<<<<< HEAD
-=======
 	//회원정보 팝업
->>>>>>> upstream/master
 	public void user_info()
 	{
 		System.out.println("회원정보 버튼 눌림");
@@ -214,10 +191,6 @@ public class mainWindowController
 		userinfoPopup.setLocation("/Application/enterUserInfoPopup.fxml");
 		userinfoPopup.show();
 	}
-<<<<<<< HEAD
-	public void logout()//로그아웃
-	{
-=======
 	//최신건강정보 팝업
 	public void health_info() {
 		System.out.println("최신 건강 정보 버튼 눌림");
@@ -227,7 +200,6 @@ public class mainWindowController
 	}
 	//로그아웃
 	public void logout() {
->>>>>>> upstream/master
 		System.out.println("로그아웃 버튼눌림");
 		try {
 			Parent login = FXMLLoader.load(getClass().getResource("../Application/root.fxml"));
@@ -238,23 +210,15 @@ public class mainWindowController
 			e1.printStackTrace();
 		}//메인메뉴로 돌아가기
 	}
-<<<<<<< HEAD
-	public void init_date(int year,int month,int date)//달력 상단에 연월일을 표시한다.
-=======
 	//달력 상단에 연월일을 표시한다.
 	public void init_date(int year,int month,int date)
->>>>>>> upstream/master
 	{
 		this.year.setText(Integer.toString(year));
 		this.month.setText(Integer.toString(month));
 		this.date.setText(Integer.toString(date));
 	}
-<<<<<<< HEAD
-	public void increase_date(){//오른쪽버튼
-=======
 	//달력 월 오른쪽버튼
 	public void increase_date() {
->>>>>>> upstream/master
 		if(__month>=12){
 			__month=1;
 			__year++;
@@ -274,13 +238,8 @@ public class mainWindowController
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-	public void decrease_date()//왼쪽버튼
-	{
-=======
 	//달력 월 왼쪽버튼
 	public void decrease_date() {
->>>>>>> upstream/master
 		if(__month<=1){
 			__month=12;
 			__year--;
@@ -299,10 +258,7 @@ public class mainWindowController
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-=======
 	//새로고침
->>>>>>> upstream/master
 	public void refresh_action()
 	{
 		try
