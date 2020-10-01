@@ -18,7 +18,10 @@ public class moves
 		db = DBConnection.getInstance();
 		ui = new userinfo();
 		ss = new selctionSort();
+<<<<<<< HEAD
 		top = 0;
+=======
+>>>>>>> upstream/master
 	}
 	public move pop()
 	{
