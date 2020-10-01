@@ -59,6 +59,14 @@ public class moves
 		}
 		return mv;
 	}
+	public move[] SLSortBy(move[] data,int top)
+	{
+		return ss.sort_moves(data,top);
+	}
+	public int getSize()
+	{
+		return this.top;
+	}
 	public void setCurrentMove(int kcal) throws SQLException
 	{
 		ui.updateCurrentMoves(kcal);

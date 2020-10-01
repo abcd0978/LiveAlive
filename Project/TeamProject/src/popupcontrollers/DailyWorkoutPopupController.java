@@ -45,7 +45,7 @@ public class DailyWorkoutPopupController extends closable implements Initializab
 		ui = new userinfo();
 		try {mv=mvs.setMoveInfo();}catch(SQLException e){e.printStackTrace();}
 		mooves = FXCollections.observableArrayList(mv);
-		sort_kcal.setOnAction(event->sort());//
+		sort_kcal.setOnAction(event->sort());//구현
 		update.setOnAction(event->update());//구현
 		saveButton.setOnAction(event->{try{save();}catch(SQLException e){e.printStackTrace();}});//구현
 		remove.setOnAction(event->remove());//구현
@@ -61,6 +61,7 @@ public class DailyWorkoutPopupController extends closable implements Initializab
     }
     public void sort()//열량순으로 정렬한다.
     {
+    	mv = mvs.SLSortBy(mv,mvs.getSize());
     	mooves = FXCollections.observableArrayList(mv);
 		movetable.setItems(mooves);
     }
